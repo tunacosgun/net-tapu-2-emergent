@@ -1,0 +1,156 @@
+{
+  "theme_archetype": {
+    "name": "Archetype 4 (Swiss & High-Contrast) + Organic Emerald",
+    "mode": "light",
+    "description": "A high-trust, premium real estate and auction platform inspired by sahibinden.com. It relies on a structural grayscale base, utilizing Emerald Green (#24A86A) as the functional authority color. The Live Auction room employs a high-stakes Dark Mode variant with stark contrasting reds and greens to elevate emotional tension and urgency.",
+    "emotion": "Professional, Reliable, Transparent, Urgent (in auctions)"
+  },
+  "typography": {
+    "strategy": "The 'Old Money Tech' variant. Sharp, authoritative headings paired with highly legible, geometric body text suitable for complex data tables and filtering.",
+    "fonts": {
+      "heading": {
+        "family": "Cabinet Grotesk",
+        "weights": ["300", "500", "800"],
+        "usage": "H1 to H4, big numeric prices, and countdown timers."
+      },
+      "body": {
+        "family": "IBM Plex Sans",
+        "weights": ["400", "500", "600"],
+        "usage": "Paragraphs, lists, UI elements, labels, and dense data tables."
+      }
+    },
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-none font-extrabold",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-tight font-bold",
+      "h3": "text-xl sm:text-2xl tracking-tight font-semibold",
+      "h4": "text-lg sm:text-xl font-medium",
+      "body": "text-base leading-relaxed text-slate-700",
+      "small": "text-sm text-slate-500",
+      "overline": "text-xs font-semibold tracking-[0.2em] uppercase text-emerald-600"
+    }
+  },
+  "colors": {
+    "backgrounds": {
+      "default": "#F8FAFC",
+      "card": "#FFFFFF",
+      "auction_room_dark": "#0B0F19",
+      "glass": "rgba(255, 255, 255, 0.8)"
+    },
+    "text": {
+      "primary": "#0F172A",
+      "secondary": "#475569",
+      "tertiary": "#94A3B8",
+      "inverse": "#FFFFFF",
+      "auction_dark_text": "#E2E8F0"
+    },
+    "brand": {
+      "primary": "#24A86A",
+      "primary_hover": "#1D8B57",
+      "primary_light": "#D1FAE5"
+    },
+    "semantic": {
+      "success": "#10B981",
+      "warning": "#F59E0B",
+      "danger": "#EF4444",
+      "danger_hover": "#DC2626",
+      "info": "#3B82F6"
+    },
+    "border": {
+      "default": "#E2E8F0",
+      "focus": "#24A86A",
+      "auction_dark": "#1E293B"
+    }
+  },
+  "spacing_and_layout": {
+    "strategy": "Generous Spacing Philosophy combined with The 'Control Room' Grid for dashboards and filters. Heavy use of p-6, p-8 for cards to prevent text collision. Mobile-first stacking.",
+    "containers": {
+      "main": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+      "auction_full": "w-full h-screen overflow-hidden bg-[#0B0F19]"
+    },
+    "grid_patterns": {
+      "bento_dashboard": "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6",
+      "property_listing": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8",
+      "filter_sidebar": "col-span-1",
+      "listing_main": "col-span-1 lg:col-span-3"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-emerald-600 text-white font-medium rounded-md px-6 py-3 hover:bg-emerald-700 hover:-translate-y-0.5 transition-all duration-200 shadow-sm focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2",
+      "secondary": "bg-white text-slate-700 border border-slate-200 font-medium rounded-md px-6 py-3 hover:bg-slate-50 hover:text-slate-900 transition-all duration-200",
+      "danger_auction": "bg-red-600 text-white font-bold rounded-md px-8 py-4 text-lg hover:bg-red-700 animate-pulse shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+    },
+    "cards": {
+      "property": "bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-xl hover:border-emerald-200 transition-all duration-300 group",
+      "dashboard_widget": "bg-white rounded-lg border border-slate-100 p-6 shadow-sm"
+    },
+    "inputs": {
+      "default": "w-full border border-slate-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+    },
+    "header": {
+      "nav": "sticky top-0 z-50 w-full backdrop-blur-xl bg-white/80 border-b border-slate-200 transition-all duration-300"
+    }
+  },
+  "animations": {
+    "hover_lift": "hover:-translate-y-1 transition-transform duration-300 ease-out",
+    "auction_pulse": "animate-pulse",
+    "fade_in_up": "animate-in fade-in slide-in-from-bottom-4 duration-500",
+    "page_transition": "animate-in fade-in duration-300"
+  },
+  "media": {
+    "images": [
+      {
+        "category": "hero_bg",
+        "url": "https://images.pexels.com/photos/5563473/pexels-photo-5563473.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Luxury modern house exterior, suitable for main landing page hero background"
+      },
+      {
+        "category": "land_drone",
+        "url": "https://images.pexels.com/photos/6422394/pexels-photo-6422394.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Lush farmland and green drone view, suitable for 'Parsel' and 'Arazi' sections"
+      },
+      {
+        "category": "trust_handshake",
+        "url": "https://images.pexels.com/photos/6077554/pexels-photo-6077554.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Business professionals handshake, for about us or trust/guarantee sections"
+      },
+      {
+        "category": "auction_gavel",
+        "url": "https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Close-up of a wooden gavel, to be used in Live Auction room rules or entry screen"
+      },
+      {
+        "category": "listing_placeholder_1",
+        "url": "https://images.unsplash.com/photo-1640109229792-a26a0ee366ff?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjBtb2Rlcm4lMjBob3VzZSUyMGFyY2hpdGVjdHVyZXxlbnwwfHx8fDE3NzQ0NzYzODJ8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Modern interior"
+      },
+      {
+        "category": "listing_placeholder_2",
+        "url": "https://images.unsplash.com/photo-1767917654302-f1ccc487b5da?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxlbXB0eSUyMGdyZWVuJTIwbGFuZCUyMGRyb25lJTIwdmlldyUyMG5hdHVyZXxlbnwwfHx8fDE3NzQ0NzYzODJ8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Dense green forest drone view"
+      }
+    ]
+  },
+  "specific_page_patterns": {
+    "homepage": "Premium hero with backdrop-blur search bar. Stats dashboard overlay. Use generous white space. Trust badges below hero.",
+    "listing_page": "Left sidebar for filters (sticky). Right grid for cards. Cards must feature an image carousel. Map view toggle using Leaflet.",
+    "detail_page": "Bento-style property info. Large hero gallery. Sticky sidebar for price and 'Contact/Bid' action. 3D or Leaflet map integration prominently displayed.",
+    "auction_room": "Force dark mode (#0B0F19 background). Dramatic Countdown timer in center. Live websocket feed on the right sidebar. Glowing red CTA for 'Place Bid'. Confetti animation on win.",
+    "admin_dashboard": "Sidebar navigation (dark slate). Main area light gray. Use Recharts for analytics. Density: high. Shadcn tables with pagination."
+  },
+  "testing_attributes": {
+    "rule": "All interactive and key informational elements MUST include a `data-testid` attribute using kebab-case role-based naming.",
+    "examples": ["data-testid='login-form-submit-button'", "data-testid='place-bid-button'", "data-testid='filter-city-select'"]
+  },
+  "instructions_to_main_agent": [
+    "CRITICAL: The project uses JavaScript (.js/.jsx) files, NOT TypeScript (.tsx). DO NOT generate .ts or .tsx files.",
+    "Always use the provided Image URLs in this file. NEVER use generic placeholder domains (e.g., via.placeholder.com).",
+    "Ensure every page has a visible navigation bar with a solid/glassmorphic background to prevent text collision over hero images.",
+    "When building Shadcn components or custom UI, use 'Cabinet Grotesk' for headings and 'IBM Plex Sans' for body text.",
+    "Use Lucide-React for all iconography as requested.",
+    "For the Live Auction page, implement a dark theme interface distinct from the rest of the application to simulate high stakes and urgency.",
+    "Install necessary packages for animations (framer-motion, lucide-react, etc.) using standard Yarn/Npm commands.",
+    "Ensure the hero image overlay is not darker than bg-black/50 to let the paid assets breathe.",
+    "Implement Sonner for toast notifications, specifically for live bid updates and filter changes."
+  ]
+}
