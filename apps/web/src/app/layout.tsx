@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { IBM_Plex_Sans } from 'next/font/google';
+import localFont from 'next/font/local';
 import { AuthProvider } from '@/providers/auth-provider';
 import { SiteSettingsProvider } from '@/providers/site-settings-provider';
 import { ErrorBoundary } from '@/components/error-boundary';
@@ -12,11 +13,38 @@ import { OrganizationJsonLd, WebSiteJsonLd, RealEstateAgentJsonLd } from '@/comp
 import { GoogleOneTap } from '@/components/google-one-tap';
 import { ScrollToTop } from '@/components/ui/scroll-to-top';
 import { MobileBottomNav } from '@/components/layout/mobile-bottom-nav';
+import { Toaster } from 'sonner';
 import './globals.css';
 
-const inter = Inter({
+// Professional Typography System
+const ibmPlexSans = IBM_Plex_Sans({
   subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '600'],
+  variable: '--font-ibm-plex',
   display: 'swap',
+});
+
+const cabinetGrotesk = localFont({
+  src: [
+    {
+      path: '../fonts/CabinetGrotesk-Light.woff2',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/CabinetGrotesk-Medium.woff2',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/CabinetGrotesk-Extrabold.woff2',
+      weight: '800',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-cabinet',
+  display: 'swap',
+  fallback: ['system-ui', 'arial'],
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -81,13 +109,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr" className={inter.className}>
+    <html lang="tr" className={`${ibmPlexSans.variable} ${cabinetGrotesk.variable}`}>
       <head>
         <OrganizationJsonLd />
         <WebSiteJsonLd />
         <RealEstateAgentJsonLd />
       </head>
-      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased">
+      <body className="min-h-screen bg-[#F8FAFC] text-slate-900 antialiased font-sans">
         <ErrorBoundary>
           <AuthProvider>
             <SiteSettingsProvider>
@@ -100,6 +128,7 @@ export default function RootLayout({
               </div>
               <MobileBottomNav />
               <ApiErrorToastContainer />
+              <Toaster position="top-right" richColors closeButton />
               <ScrollToTop />
               <GoogleOneTap />
             </SiteSettingsProvider>
