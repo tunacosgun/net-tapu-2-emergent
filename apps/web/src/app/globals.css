@@ -1,407 +1,107 @@
+@import '@fontsource/outfit/300.css';
+@import '@fontsource/outfit/400.css';
+@import '@fontsource/outfit/500.css';
+@import '@fontsource/outfit/600.css';
+@import '@fontsource/outfit/700.css';
+@import '@fontsource/manrope/400.css';
+@import '@fontsource/manrope/500.css';
+@import '@fontsource/manrope/600.css';
+@import '@fontsource/manrope/700.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ══════════════════════════════════════════════════════════════
-   PROFESSIONAL DESIGN SYSTEM - Net Tapu Platform
-   Inspired by: sahibinden.com, modern Swiss design
-   ══════════════════════════════════════════════════════════════ */
-
-:root {
-  /* === Brand Colors === */
-  --emerald-primary: #24A86A;
-  --emerald-hover: #1D8B57;
-  --emerald-light: #D1FAE5;
-  
-  /* === Backgrounds === */
-  --bg-default: #F8FAFC;
-  --bg-card: #FFFFFF;
-  --bg-glass: rgba(255, 255, 255, 0.8);
-  --bg-auction-dark: #0B0F19;
-  
-  /* === Text Colors === */
-  --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --text-tertiary: #94A3B8;
-  --text-inverse: #FFFFFF;
-  --text-auction-dark: #E2E8F0;
-  
-  /* === Semantic Colors === */
-  --success: #10B981;
-  --warning: #F59E0B;
-  --danger: #EF4444;
-  --danger-hover: #DC2626;
-  --info: #3B82F6;
-  
-  /* === Borders === */
-  --border-default: #E2E8F0;
-  --border-focus: #24A86A;
-  --border-auction-dark: #1E293B;
-  
-  /* === Shadows === */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-  --shadow-emerald: 0 0 15px rgba(36, 168, 106, 0.3);
-}
-
-/* === Typography Base === */
 @layer base {
-  * {
-    @apply border-slate-200;
+  :root {
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Manrope', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    
+    /* Design system colors */
+    --color-primary: 15 23 42;
+    --color-primary-foreground: 255 255 255;
+    --color-secondary: 30 41 59;
+    --color-accent: 197 160 89;
+    --color-accent-foreground: 0 0 0;
+    --color-success: 16 185 129;
+    --color-warning: 245 158 11;
+    --color-destructive: 239 68 68;
+    --color-muted: 241 245 249;
+    --color-muted-foreground: 100 116 139;
+    --color-background-light: 250 250 250;
+    --color-background-dark: 11 15 25;
+    --color-border: 226 232 240;
+    --color-border-dark: 30 41 59;
   }
-  
+
   body {
-    @apply font-sans antialiased;
-    font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
+    font-family: var(--font-body);
+    @apply text-slate-600 bg-slate-50;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-extrabold tracking-tight text-slate-900;
+    font-family: var(--font-heading);
+    @apply text-slate-900;
   }
-  
-  h1 {
-    @apply text-4xl sm:text-5xl lg:text-6xl leading-none;
-  }
-  
-  h2 {
-    @apply text-2xl sm:text-3xl lg:text-4xl leading-tight;
-  }
-  
-  h3 {
-    @apply text-xl sm:text-2xl font-semibold;
-  }
-  
-  h4 {
-    @apply text-lg sm:text-xl font-medium;
-  }
-}
 
-/* ══════════════════════════════════════════════════════════════
-   PROFESSIONAL ANIMATIONS
-   ══════════════════════════════════════════════════════════════ */
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400;
   }
 }
 
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-heading);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .font-body {
+    font-family: var(--font-body);
   }
-}
 
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
+  /* Glass morphism */
+  .glass {
+    @apply bg-white/80 backdrop-blur-xl border border-white/20;
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
+
+  .glass-dark {
+    @apply bg-slate-900/80 backdrop-blur-2xl border border-slate-700/50;
   }
-}
 
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
+  /* Animations */
+  @keyframes bid-flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
   }
-  to {
-    opacity: 1;
-    transform: translateX(0);
+
+  .animate-bid-flash {
+    animation: bid-flash 0.5s ease-in-out;
   }
-}
 
-@keyframes shimmer {
-  0% {
-    background-position: -200% center;
+  /* Text shadows for glowing effects */
+  .text-glow {
+    text-shadow: 0 0 20px currentColor;
   }
-  100% {
-    background-position: 200% center;
-  }
-}
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes pulse-emerald {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(36, 168, 106, 0.7);
-  }
-  50% {
-    box-shadow: 0 0 0 12px rgba(36, 168, 106, 0);
-  }
-}
-
-@keyframes auction-pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
-  }
-  50% {
-    box-shadow: 0 0 0 15px rgba(239, 68, 68, 0);
-  }
-}
-
-/* === Animation Utilities === */
-.animate-fade-in-up {
-  animation: fadeInUp 0.5s ease-out forwards;
-}
-
-.animate-fade-in-down {
-  animation: fadeInDown 0.4s ease-out forwards;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.3s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.4s ease-out forwards;
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.4) 50%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2s linear infinite;
-}
-
-.animate-pulse-emerald {
-  animation: pulse-emerald 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-.animate-auction-pulse {
-  animation: auction-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-/* === Stagger Children Animation === */
-.stagger-children > * {
-  animation: fadeInUp 0.5s ease-out both;
-}
-
-.stagger-children > *:nth-child(1) {
-  animation-delay: 0ms;
-}
-.stagger-children > *:nth-child(2) {
-  animation-delay: 100ms;
-}
-.stagger-children > *:nth-child(3) {
-  animation-delay: 200ms;
-}
-.stagger-children > *:nth-child(4) {
-  animation-delay: 300ms;
-}
-.stagger-children > *:nth-child(5) {
-  animation-delay: 400ms;
-}
-.stagger-children > *:nth-child(6) {
-  animation-delay: 500ms;
-}
-
-/* ══════════════════════════════════════════════════════════════
-   PROFESSIONAL UI COMPONENTS
-   ══════════════════════════════════════════════════════════════ */
-
-/* === Glassmorphism Effect === */
-.glass-effect {
-  @apply bg-white/80 backdrop-blur-xl border border-white/20 shadow-lg;
-}
-
-.glass-effect-dark {
-  @apply bg-slate-900/80 backdrop-blur-xl border border-white/10 shadow-xl;
-}
-
-/* === Card Hover Lift === */
-.card-hover-lift {
-  @apply transition-all duration-300 ease-out;
-}
-
-.card-hover-lift:hover {
-  @apply -translate-y-1 shadow-xl;
-}
-
-/* === Premium Card === */
-.premium-card {
-  @apply bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-xl hover:border-emerald-200 transition-all duration-300;
-}
-
-/* === Button Shine Effect === */
-.btn-shine {
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-shine::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -75%;
-  width: 50%;
-  height: 200%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
-  transform: rotate(25deg);
-  transition: left 0.6s ease;
-}
-
-.btn-shine:hover::after {
-  left: 125%;
-}
-
-/* === Icon Hover Rotate === */
-.icon-hover-rotate {
-  @apply transition-transform duration-300 ease-out;
-}
-
-.icon-hover-rotate:hover {
-  @apply rotate-12 scale-110;
-}
-
-/* === Text Gradient === */
-.text-gradient-emerald {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-emerald-400;
-}
-
-.text-gradient-gold {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-amber-400;
-}
-
-/* === Auction Urgency Design === */
-.auction-urgent {
-  @apply bg-gradient-to-br from-red-600 to-red-700 text-white font-bold shadow-[0_0_20px_rgba(239,68,68,0.5)];
-}
-
-/* === Price Display === */
-.price-display {
-  @apply font-heading text-3xl font-extrabold tracking-tight text-emerald-600;
-}
-
-/* === Overline Text === */
-.overline {
-  @apply text-xs font-semibold tracking-[0.2em] uppercase text-emerald-600;
-}
-
-/* ══════════════════════════════════════════════════════════════
-   CUSTOM SCROLLBAR
-   ══════════════════════════════════════════════════════════════ */
-
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-slate-100;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 rounded-full hover:bg-slate-400;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-400;
-}
-
-/* ══════════════════════════════════════════════════════════════
-   LEAFLET MAP CUSTOM STYLES
-   ══════════════════════════════════════════════════════════════ */
-
-.leaflet-container {
-  @apply rounded-xl border border-slate-200 shadow-sm;
-}
-
-.leaflet-popup-content-wrapper {
-  @apply rounded-lg shadow-xl border border-slate-100;
-}
-
-.leaflet-popup-tip {
-  @apply bg-white;
-}
-
-/* ══════════════════════════════════════════════════════════════
-   RESPONSIVE UTILITIES
-   ══════════════════════════════════════════════════════════════ */
-
-@media (max-width: 640px) {
-  h1 {
-    @apply text-3xl;
-  }
-  
-  h2 {
-    @apply text-2xl;
-  }
-}
-
-/* ══════════════════════════════════════════════════════════════
-   PRINT STYLES
-   ══════════════════════════════════════════════════════════════ */
-
-@media print {
-  .no-print {
-    display: none !important;
-  }
-  
-  body {
-    @apply bg-white text-black;
-  }
-}
-
-/* ══════════════════════════════════════════════════════════════
-   ACCESSIBILITY
-   ══════════════════════════════════════════════════════════════ */
-
-/* Focus visible for keyboard navigation */
-*:focus-visible {
-  @apply outline-none ring-2 ring-emerald-500 ring-offset-2;
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* High contrast mode */
-@media (prefers-contrast: high) {
-  .glass-effect,
-  .glass-effect-dark {
-    @apply bg-white border-2 border-black;
+  .text-glow-strong {
+    text-shadow: 0 0 30px currentColor, 0 0 60px currentColor;
   }
 }
