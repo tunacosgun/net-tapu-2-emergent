@@ -250,7 +250,7 @@
 
 /* === Premium Card === */
 .premium-card {
-  @apply bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-xl hover:border-emerald-200 transition-all duration-300 group;
+  @apply bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-xl hover:border-emerald-200 transition-all duration-300;
 }
 
 /* === Button Shine Effect === */

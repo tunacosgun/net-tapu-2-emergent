@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import { IBM_Plex_Sans } from 'next/font/google';
-import localFont from 'next/font/local';
+import { IBM_Plex_Sans, Inter } from 'next/font/google';
 import { AuthProvider } from '@/providers/auth-provider';
 import { SiteSettingsProvider } from '@/providers/site-settings-provider';
 import { ErrorBoundary } from '@/components/error-boundary';
@@ -24,27 +23,12 @@ const ibmPlexSans = IBM_Plex_Sans({
   display: 'swap',
 });
 
-const cabinetGrotesk = localFont({
-  src: [
-    {
-      path: '../fonts/CabinetGrotesk-Light.woff2',
-      weight: '300',
-      style: 'normal',
-    },
-    {
-      path: '../fonts/CabinetGrotesk-Medium.woff2',
-      weight: '500',
-      style: 'normal',
-    },
-    {
-      path: '../fonts/CabinetGrotesk-Extrabold.woff2',
-      weight: '800',
-      style: 'normal',
-    },
-  ],
+// Using Inter as heading font (similar to Cabinet Grotesk)
+const interDisplay = Inter({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['300', '500', '800'],
   variable: '--font-cabinet',
   display: 'swap',
-  fallback: ['system-ui', 'arial'],
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -109,7 +93,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr" className={`${ibmPlexSans.variable} ${cabinetGrotesk.variable}`}>
+    <html lang="tr" className={`${ibmPlexSans.variable} ${interDisplay.variable}`}>
       <head>
         <OrganizationJsonLd />
         <WebSiteJsonLd />
