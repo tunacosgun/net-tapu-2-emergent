@@ -12,7 +12,7 @@ import { useRateLimit } from '@/hooks/use-rate-limit';
 import { Button, Alert } from '@/components/ui';
 import type { ApiError } from '@/types';
 import { AxiosError } from 'axios';
-import { User, Mail, Lock, Phone, AlertCircle, ArrowRight, Eye, EyeOff, CheckCircle2, UserCircle } from 'lucide-react';
+import { User, Mail, Lock, Phone, AlertCircle, ArrowRight, Eye, EyeOff, Sparkles, UserCircle } from 'lucide-react';
 
 function GoogleIcon() {
   return (
@@ -79,324 +79,313 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="relative min-h-screen overflow-hidden bg-slate-950">
       
-      {/* Left Side - Branding */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 relative overflow-hidden">
-        {/* Pattern overlay */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-40" />
-        
-        <div className="relative z-10 flex flex-col justify-center px-16 text-white">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            {/* Logo */}
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                <span className="text-2xl font-black">NT</span>
-              </div>
-              <div>
-                <h2 className="text-2xl font-heading font-bold">NetTapu</h2>
-                <p className="text-blue-100 text-sm">Arsa & Açık Artırma</p>
-              </div>
-            </div>
-
-            <h1 className="text-4xl font-heading font-extrabold tracking-tight mb-4">
-              Ücretsiz Üye Olun,<br />Fırsatları Kaçırmayın
-            </h1>
-            <p className="text-xl text-blue-100 mb-12 leading-relaxed">
-              Binlerce doğrulanmış arsa ve canlı açık artırmalara anında erişim kazanın.
-            </p>
-
-            {/* Benefits */}
-            <div className="space-y-4">
-              {[
-                'Özel fırsatlara erken erişim',
-                'Canlı ihalelere katılım hakkı',
-                'Detaylı arsa raporları',
-                'Profesyonel danışmanlık',
-              ].map((benefit, i) => (
-                <motion.div
-                  key={benefit}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                  className="flex items-center gap-3"
-                >
-                  <CheckCircle2 className="h-6 w-6 text-blue-300" />
-                  <span className="text-blue-50">{benefit}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
+      {/* Animated Gradient Mesh Background */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-purple-500/30 rounded-full blur-[128px] animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-pink-500/20 rounded-full blur-[128px] animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[128px] animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }} />
       </div>
 
-      {/* Right Side - Register Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-slate-50 overflow-y-auto">
+      {/* Grid overlay */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-40" />
+
+      {/* Content */}
+      <div className="relative z-10 flex min-h-screen items-center justify-center p-4 py-12">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4 }}
-          className="w-full max-w-md py-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="w-full max-w-lg"
         >
-          {/* Mobile Logo */}
-          <div className="lg:hidden text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 mb-4 shadow-lg shadow-blue-500/30">
-              <span className="text-2xl font-black text-white">NT</span>
-            </div>
+          
+          {/* Logo & Brand */}
+          <div className="text-center mb-8">
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 mb-6 shadow-2xl shadow-purple-500/50 relative"
+            >
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-400 to-pink-400 blur-xl opacity-60 animate-pulse" />
+              <span className="relative text-3xl font-black text-white">NT</span>
+            </motion.div>
+            <h1 className="text-4xl font-heading font-extrabold text-white mb-2 tracking-tight">
+              Aramıza Katılın
+            </h1>
+            <p className="text-lg text-slate-400">
+              Ücretsiz hesap oluşturun
+            </p>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-xl p-8">
-            {/* Header */}
-            <div className="text-center mb-8">
-              <h1 className="text-3xl font-heading font-extrabold text-slate-900 mb-2">
-                Hesap Oluşturun
-              </h1>
-              <p className="text-slate-600">
-                Hemen ücretsiz üye olun, ihalelere katılın
-              </p>
-            </div>
-
-            {/* Server Error */}
-            {serverError && (
-              <Alert variant="destructive" className="mb-6">
-                <AlertCircle className="h-4 w-4" />
-                <span className="ml-2">{serverError}</span>
-              </Alert>
-            )}
-
-            {/* Rate Limit Warning */}
-            {isLimited && (
-              <Alert variant="warning" className="mb-6">
-                <AlertCircle className="h-4 w-4" />
-                <span className="ml-2">
-                  Çok fazla deneme yaptınız. {cooldown} saniye sonra tekrar deneyin.
-                </span>
-              </Alert>
-            )}
-
-            {/* Google Register Button */}
-            <button
-              type="button"
-              onClick={handleGoogleRegister}
-              className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white border-2 border-slate-200 rounded-xl text-slate-700 font-semibold hover:bg-slate-50 hover:border-slate-300 transition-all duration-200 shadow-sm mb-6"
-            >
-              <GoogleIcon />
-              Google ile Kaydol
-            </button>
-
-            {/* Divider */}
-            <div className="relative mb-6">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-200" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-slate-500 font-medium">veya e-posta ile</span>
-              </div>
-            </div>
-
-            {/* Register Form */}
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          {/* Glass Card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="relative"
+          >
+            {/* Glow effect */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity" />
+            
+            {/* Card */}
+            <div className="relative bg-slate-900/80 backdrop-blur-2xl border border-slate-700/50 rounded-2xl p-8 shadow-2xl">
               
-              {/* Username */}
-              <div>
-                <label htmlFor="username" className="block text-sm font-semibold text-slate-700 mb-2">
-                  Kullanıcı Adı
-                </label>
-                <div className="relative">
-                  <UserCircle className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                  <input
-                    {...reg('username')}
-                    type="text"
-                    id="username"
-                    placeholder="kullaniciadi"
-                    className={`w-full pl-12 pr-4 py-3 bg-slate-50 border rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                      errors.username ? 'border-red-300 focus:ring-red-500' : 'border-slate-200'
-                    }`}
-                    disabled={isSubmitting}
-                  />
-                </div>
-                {errors.username && (
-                  <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                    <AlertCircle className="h-4 w-4" />
-                    {errors.username.message}
-                  </p>
-                )}
-              </div>
+              {/* Server Error */}
+              {serverError && (
+                <Alert variant="destructive" className="mb-6 bg-red-500/10 border-red-500/50 text-red-400">
+                  <AlertCircle className="h-4 w-4" />
+                  <span className="ml-2">{serverError}</span>
+                </Alert>
+              )}
 
-              {/* Name Fields (2 columns) */}
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label htmlFor="firstName" className="block text-sm font-semibold text-slate-700 mb-2">
-                    Ad
-                  </label>
-                  <input
-                    {...reg('firstName')}
-                    type="text"
-                    id="firstName"
-                    placeholder="Ad"
-                    className={`w-full px-4 py-3 bg-slate-50 border rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                      errors.firstName ? 'border-red-300 focus:ring-red-500' : 'border-slate-200'
-                    }`}
-                    disabled={isSubmitting}
-                  />
-                  {errors.firstName && (
-                    <p className="mt-1 text-xs text-red-600">{errors.firstName.message}</p>
-                  )}
-                </div>
-                <div>
-                  <label htmlFor="lastName" className="block text-sm font-semibold text-slate-700 mb-2">
-                    Soyad
-                  </label>
-                  <input
-                    {...reg('lastName')}
-                    type="text"
-                    id="lastName"
-                    placeholder="Soyad"
-                    className={`w-full px-4 py-3 bg-slate-50 border rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                      errors.lastName ? 'border-red-300 focus:ring-red-500' : 'border-slate-200'
-                    }`}
-                    disabled={isSubmitting}
-                  />
-                  {errors.lastName && (
-                    <p className="mt-1 text-xs text-red-600">{errors.lastName.message}</p>
-                  )}
-                </div>
-              </div>
+              {/* Rate Limit Warning */}
+              {isLimited && (
+                <Alert variant="warning" className="mb-6 bg-amber-500/10 border-amber-500/50 text-amber-400">
+                  <AlertCircle className="h-4 w-4" />
+                  <span className="ml-2">
+                    Çok fazla deneme. {cooldown} saniye bekleyin.
+                  </span>
+                </Alert>
+              )}
 
-              {/* Email */}
-              <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-2">
-                  E-posta Adresi
-                </label>
-                <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                  <input
-                    {...reg('email')}
-                    type="email"
-                    id="email"
-                    placeholder="ornek@email.com"
-                    className={`w-full pl-12 pr-4 py-3 bg-slate-50 border rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                      errors.email ? 'border-red-300 focus:ring-red-500' : 'border-slate-200'
-                    }`}
-                    disabled={isSubmitting}
-                  />
-                </div>
-                {errors.email && (
-                  <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                    <AlertCircle className="h-4 w-4" />
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Phone (Optional) */}
-              <div>
-                <label htmlFor="phone" className="block text-sm font-semibold text-slate-700 mb-2">
-                  Telefon <span className="text-slate-400 font-normal">(Opsiyonel)</span>
-                </label>
-                <div className="relative">
-                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                  <input
-                    {...reg('phone')}
-                    type="tel"
-                    id="phone"
-                    placeholder="0555 123 45 67"
-                    className={`w-full pl-12 pr-4 py-3 bg-slate-50 border rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                      errors.phone ? 'border-red-300 focus:ring-red-500' : 'border-slate-200'
-                    }`}
-                    disabled={isSubmitting}
-                  />
-                </div>
-                {errors.phone && (
-                  <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                    <AlertCircle className="h-4 w-4" />
-                    {errors.phone.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Password */}
-              <div>
-                <label htmlFor="password" className="block text-sm font-semibold text-slate-700 mb-2">
-                  Şifre
-                </label>
-                <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                  <input
-                    {...reg('password')}
-                    type={showPassword ? 'text' : 'password'}
-                    id="password"
-                    placeholder="En az 8 karakter"
-                    className={`w-full pl-12 pr-12 py-3 bg-slate-50 border rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                      errors.password ? 'border-red-300 focus:ring-red-500' : 'border-slate-200'
-                    }`}
-                    disabled={isSubmitting}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                  >
-                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                  </button>
-                </div>
-                {errors.password && (
-                  <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                    <AlertCircle className="h-4 w-4" />
-                    {errors.password.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Submit Button */}
+              {/* Google Register */}
               <button
-                type="submit"
-                disabled={isSubmitting || isLimited}
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-xl font-bold hover:from-blue-700 hover:to-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 btn-shine"
+                type="button"
+                onClick={handleGoogleRegister}
+                className="group relative w-full flex items-center justify-center gap-3 px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white font-semibold hover:bg-white/20 transition-all duration-200 overflow-hidden mb-6"
               >
-                {isSubmitting ? (
-                  <>
-                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                    Hesap Oluşturuluyor...
-                  </>
-                ) : (
-                  <>
-                    Ücretsiz Kaydol
-                    <ArrowRight className="h-5 w-5" />
-                  </>
-                )}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
+                <GoogleIcon />
+                <span className="relative">Google ile Kaydol</span>
               </button>
 
-              {/* Terms */}
-              <p className="text-xs text-center text-slate-500 leading-relaxed">
-                Kaydolarak{' '}
-                <Link href="/legal" className="text-blue-600 hover:underline">
-                  Kullanım Koşulları
-                </Link>{' '}
-                ve{' '}
-                <Link href="/legal" className="text-blue-600 hover:underline">
-                  Gizlilik Politikası
-                </Link>
-                'nı kabul etmiş olursunuz.
-              </p>
-            </form>
+              {/* Divider */}
+              <div className="relative mb-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-slate-700" />
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-4 bg-slate-900 text-slate-400 font-medium">veya</span>
+                </div>
+              </div>
 
-            {/* Login Link */}
-            <div className="mt-6 text-center">
-              <p className="text-slate-600">
-                Zaten hesabınız var mı?{' '}
-                <Link
-                  href="/login"
-                  className="font-semibold text-blue-600 hover:text-blue-700 transition-colors"
+              {/* Register Form */}
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                
+                {/* Username */}
+                <div>
+                  <label htmlFor="username" className="block text-sm font-semibold text-slate-300 mb-2">
+                    Kullanıcı Adı
+                  </label>
+                  <div className="relative group">
+                    <UserCircle className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500 group-focus-within:text-purple-400 transition-colors" />
+                    <input
+                      {...reg('username')}
+                      type="text"
+                      id="username"
+                      placeholder="kullaniciadi"
+                      className={`w-full pl-12 pr-4 py-3 bg-slate-800/50 border rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all ${
+                        errors.username ? 'border-red-500/50' : 'border-slate-700'
+                      }`}
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                  {errors.username && (
+                    <p className="mt-2 text-sm text-red-400 flex items-center gap-1">
+                      <AlertCircle className="h-4 w-4" />
+                      {errors.username.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Name Fields */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label htmlFor="firstName" className="block text-sm font-semibold text-slate-300 mb-2">
+                      Ad
+                    </label>
+                    <input
+                      {...reg('firstName')}
+                      type="text"
+                      id="firstName"
+                      placeholder="Ad"
+                      className={`w-full px-4 py-3 bg-slate-800/50 border rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all ${
+                        errors.firstName ? 'border-red-500/50' : 'border-slate-700'
+                      }`}
+                      disabled={isSubmitting}
+                    />
+                    {errors.firstName && (
+                      <p className="mt-1 text-xs text-red-400">{errors.firstName.message}</p>
+                    )}
+                  </div>
+                  <div>
+                    <label htmlFor="lastName" className="block text-sm font-semibold text-slate-300 mb-2">
+                      Soyad
+                    </label>
+                    <input
+                      {...reg('lastName')}
+                      type="text"
+                      id="lastName"
+                      placeholder="Soyad"
+                      className={`w-full px-4 py-3 bg-slate-800/50 border rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all ${
+                        errors.lastName ? 'border-red-500/50' : 'border-slate-700'
+                      }`}
+                      disabled={isSubmitting}
+                    />
+                    {errors.lastName && (
+                      <p className="mt-1 text-xs text-red-400">{errors.lastName.message}</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label htmlFor="email" className="block text-sm font-semibold text-slate-300 mb-2">
+                    E-posta
+                  </label>
+                  <div className="relative group">
+                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500 group-focus-within:text-purple-400 transition-colors" />
+                    <input
+                      {...reg('email')}
+                      type="email"
+                      id="email"
+                      placeholder="ornek@email.com"
+                      className={`w-full pl-12 pr-4 py-3 bg-slate-800/50 border rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all ${
+                        errors.email ? 'border-red-500/50' : 'border-slate-700'
+                      }`}
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                  {errors.email && (
+                    <p className="mt-2 text-sm text-red-400 flex items-center gap-1">
+                      <AlertCircle className="h-4 w-4" />
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Phone */}
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-semibold text-slate-300 mb-2">
+                    Telefon <span className="text-slate-500 font-normal">(Opsiyonel)</span>
+                  </label>
+                  <div className="relative group">
+                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500 group-focus-within:text-purple-400 transition-colors" />
+                    <input
+                      {...reg('phone')}
+                      type="tel"
+                      id="phone"
+                      placeholder="0555 123 45 67"
+                      className={`w-full pl-12 pr-4 py-3 bg-slate-800/50 border rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all ${
+                        errors.phone ? 'border-red-500/50' : 'border-slate-700'
+                      }`}
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                  {errors.phone && (
+                    <p className="mt-2 text-sm text-red-400 flex items-center gap-1">
+                      <AlertCircle className="h-4 w-4" />
+                      {errors.phone.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Password */}
+                <div>
+                  <label htmlFor="password" className="block text-sm font-semibold text-slate-300 mb-2">
+                    Şifre
+                  </label>
+                  <div className="relative group">
+                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500 group-focus-within:text-purple-400 transition-colors" />
+                    <input
+                      {...reg('password')}
+                      type={showPassword ? 'text' : 'password'}
+                      id="password"
+                      placeholder="En az 8 karakter"
+                      className={`w-full pl-12 pr-12 py-3 bg-slate-800/50 border rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all ${
+                        errors.password ? 'border-red-500/50' : 'border-slate-700'
+                      }`}
+                      disabled={isSubmitting}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors"
+                    >
+                      {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                    </button>
+                  </div>
+                  {errors.password && (
+                    <p className="mt-2 text-sm text-red-400 flex items-center gap-1">
+                      <AlertCircle className="h-4 w-4" />
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting || isLimited}
+                  className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 p-[2px] transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 mt-6"
                 >
-                  Giriş Yapın
-                </Link>
-              </p>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity blur-xl" />
+                  <div className="relative flex items-center justify-center gap-2 bg-slate-900 rounded-[10px] px-6 py-3 font-bold text-white group-hover:bg-transparent transition-colors">
+                    {isSubmitting ? (
+                      <>
+                        <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                        Hesap Oluşturuluyor...
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="h-5 w-5" />
+                        Ücretsiz Kaydol
+                        <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
+                  </div>
+                </button>
+
+                {/* Terms */}
+                <p className="text-xs text-center text-slate-500 leading-relaxed mt-4">
+                  Kaydolarak{' '}
+                  <Link href="/legal" className="text-purple-400 hover:underline">
+                    Kullanım Koşulları
+                  </Link>
+                  {' '}ve{' '}
+                  <Link href="/legal" className="text-purple-400 hover:underline">
+                    Gizlilik Politikası
+                  </Link>
+                  'nı kabul edersiniz.
+                </p>
+              </form>
+
+              {/* Login Link */}
+              <div className="mt-6 text-center">
+                <p className="text-slate-400">
+                  Zaten hesabınız var mı?{' '}
+                  <Link
+                    href="/login"
+                    className="font-semibold text-purple-400 hover:text-purple-300 transition-colors"
+                  >
+                    Giriş Yapın
+                  </Link>
+                </p>
+              </div>
             </div>
+          </motion.div>
+
+          {/* Footer */}
+          <div className="mt-8 text-center text-sm text-slate-500">
+            <Link href="/legal" className="hover:text-slate-400 transition-colors">
+              Gizlilik
+            </Link>
+            <span className="mx-2">•</span>
+            <Link href="/legal" className="hover:text-slate-400 transition-colors">
+              Koşullar
+            </Link>
           </div>
         </motion.div>
       </div>
