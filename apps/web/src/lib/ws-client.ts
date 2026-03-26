@@ -2,7 +2,7 @@ import { io, Socket } from 'socket.io-client';
 import { useAuthStore } from '@/stores/auth-store';
 import { useAuctionStore } from '@/stores/auction-store';
 import { useConnectionStore } from '@/stores/connection-store';
-import type { ServerMessage } from '@nettapu/shared/dist/types/auction-ws.types';
+import type { ServerMessage } from '@nettapu/shared/src/types/auction-ws.types';
 
 const WS_URL =
   typeof window !== 'undefined'

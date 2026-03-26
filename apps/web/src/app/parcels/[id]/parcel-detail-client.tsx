@@ -258,18 +258,18 @@ export default function ParcelDetailClient() {
 
               {/* Quick stats */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-100">
-                {parcel.totalArea && (
+                {parcel.areaM2 && (
                   <StatCard
                     icon={Maximize2}
                     label="Toplam Alan"
-                    value={`${parcel.totalArea.toLocaleString()} m²`}
+                    value={`${Number(parcel.areaM2).toLocaleString()} m²`}
                   />
                 )}
-                {parcel.parcelNo && (
+                {parcel.ada && parcel.parsel && (
                   <StatCard
                     icon={FileText}
                     label="Ada/Parsel"
-                    value={parcel.parcelNo}
+                    value={`${parcel.ada}/${parcel.parsel}`}
                   />
                 )}
                 <StatCard
@@ -310,13 +310,13 @@ export default function ParcelDetailClient() {
                 onToggle={() => setExpandedSection(expandedSection === 'details' ? null : 'details')}
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <DetailRow label="İlan No" value={parcel.listingNumber || parcelId} />
+                  <DetailRow label="İlan No" value={parcel.listingId || parcelId} />
                   <DetailRow label="Durum" value={parcel.status === 'active' ? 'Satışta' : parcel.status === 'sold' ? 'Satıldı' : 'Kapalı'} />
                   {parcel.city && <DetailRow label="Şehir" value={parcel.city} />}
                   {parcel.district && <DetailRow label="İlçe" value={parcel.district} />}
                   {parcel.neighborhood && <DetailRow label="Mahalle" value={parcel.neighborhood} />}
-                  {parcel.parcelNo && <DetailRow label="Ada/Parsel" value={parcel.parcelNo} />}
-                  {parcel.totalArea && <DetailRow label="Toplam Alan" value={`${parcel.totalArea.toLocaleString()} m²`} />}
+                  {parcel.ada && parcel.parsel && <DetailRow label="Ada/Parsel" value={`${parcel.ada}/${parcel.parsel}`} />}
+                  {parcel.areaM2 && <DetailRow label="Toplam Alan" value={`${Number(parcel.areaM2).toLocaleString()} m²`} />}
                   {parcel.zoningStatus && <DetailRow label="İmar Durumu" value={parcel.zoningStatus} />}
                 </div>
               </AccordionSection>
@@ -349,9 +349,9 @@ export default function ParcelDetailClient() {
                   <p className="text-4xl font-heading font-extrabold text-emerald-600 tracking-tight">
                     {formatPrice(parcel.price)}
                   </p>
-                  {parcel.totalArea && (
+                  {parcel.areaM2 && parcel.price && (
                     <p className="mt-2 text-sm text-slate-500">
-                      {formatPrice(Math.round(parcel.price / parcel.totalArea))} / m²
+                      {formatPrice(String(Math.round(Number(parcel.price) / Number(parcel.areaM2))))} / m²
                     </p>
                   )}
                 </div>
@@ -382,6 +382,7 @@ export default function ParcelDetailClient() {
               </div>
 
               {/* AUCTION INFO (if applicable) */}
+              {/* Temporarily disabled - needs proper type definition
               {parcel.auction && (
                 <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-6">
                   <div className="flex items-center gap-2 mb-4">
@@ -410,6 +411,7 @@ export default function ParcelDetailClient() {
                   </div>
                 </div>
               )}
+              */}
 
               {/* TRUST BADGES */}
               <div className="bg-slate-100 rounded-xl p-4 space-y-3">

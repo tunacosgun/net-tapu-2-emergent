@@ -254,10 +254,10 @@ function ParcelsContent() {
                   <FilterPill label={selectedCity} onRemove={() => handleCityFilter(selectedCity)} />
                 )}
                 {priceRange.min && (
-                  <FilterPill label={`Min: ${formatPrice(Number(priceRange.min))}`} onRemove={() => setPriceRange({ ...priceRange, min: '' })} />
+                  <FilterPill label={`Min: ${formatPrice(String(priceRange.min))}`} onRemove={() => setPriceRange({ ...priceRange, min: '' })} />
                 )}
                 {priceRange.max && (
-                  <FilterPill label={`Max: ${formatPrice(Number(priceRange.max))}`} onRemove={() => setPriceRange({ ...priceRange, max: '' })} />
+                  <FilterPill label={`Max: ${formatPrice(String(priceRange.max))}`} onRemove={() => setPriceRange({ ...priceRange, max: '' })} />
                 )}
                 {isFeatured && (
                   <FilterPill label="Öne Çıkan" onRemove={() => setIsFeatured(false)} />
@@ -533,7 +533,7 @@ function ParcelsContent() {
 function ParcelCard({ parcel }: { parcel: Parcel }) {
   const [loved, setLoved] = useState(false);
   const compareStore = useCompareStore();
-  const isComparing = compareStore.parcels.some((p) => p.id === parcel.id);
+  const isComparing = compareStore.selectedParcels.some((p) => p.id === parcel.id);
 
   const mainImage = parcel.images?.[0]
     ? resolveImageUrl(parcel.images[0])
@@ -579,8 +579,7 @@ function ParcelCard({ parcel }: { parcel: Parcel }) {
           <button
             onClick={(e) => {
               e.preventDefault();
-              if (isComparing) compareStore.removeParcel(parcel.id);
-              else compareStore.addParcel(parcel);
+              compareStore.toggleParcel(parcel);
             }}
             className={`p-2 rounded-full backdrop-blur-sm transition-all ${isComparing ? 'bg-emerald-600 text-white' : 'bg-white/90 text-slate-600 hover:bg-white'}`}
           >
@@ -619,15 +618,15 @@ function ParcelCard({ parcel }: { parcel: Parcel }) {
 
         {/* Features */}
         <div className="flex items-center gap-4 pt-3 border-t border-slate-100 text-xs text-slate-600">
-          {parcel.totalArea && (
+          {parcel.areaM2 && (
             <span className="flex items-center gap-1">
               <Maximize2 className="h-3.5 w-3.5" />
-              {parcel.totalArea.toLocaleString()} m²
+              {Number(parcel.areaM2).toLocaleString()} m²
             </span>
           )}
-          {parcel.parcelNo && (
+          {parcel.ada && parcel.parsel && (
             <span className="truncate">
-              Ada: {parcel.parcelNo.split('/')[0]}
+              Ada: {parcel.ada}
             </span>
           )}
         </div>
@@ -684,14 +683,14 @@ function ParcelListItem({ parcel }: { parcel: Parcel }) {
                 </p>
               )}
               <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
-                {parcel.totalArea && (
+                {parcel.areaM2 && (
                   <span className="flex items-center gap-1">
                     <Maximize2 className="h-4 w-4" />
-                    {parcel.totalArea.toLocaleString()} m²
+                    {Number(parcel.areaM2).toLocaleString()} m²
                   </span>
                 )}
-                {parcel.parcelNo && (
-                  <span>Ada/Parsel: {parcel.parcelNo}</span>
+                {parcel.ada && parcel.parsel && (
+                  <span>Ada/Parsel: {parcel.ada}/{parcel.parsel}</span>
                 )}
               </div>
             </div>

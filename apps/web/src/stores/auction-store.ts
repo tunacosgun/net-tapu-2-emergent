@@ -6,7 +6,7 @@ import type {
   AuctionExtendedMessage,
   AuctionEndingMessage,
   AuctionEndedMessage,
-} from '@nettapu/shared/dist/types/auction-ws.types';
+} from '@nettapu/shared/src/types/auction-ws.types';
 import type { Auction, Payment } from '@/types';
 
 const MAX_BID_FEED = 50;
