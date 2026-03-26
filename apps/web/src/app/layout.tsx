@@ -105,7 +105,7 @@ export default function RootLayout({
             <SiteSettingsProvider>
               <div className="flex min-h-screen flex-col">
                 <HeaderPro />
-                <div className="flex-1">
+                <div className="flex-1 pt-32">
                   <FullBanGate>{children}</FullBanGate>
                 </div>
                 <Footer />
