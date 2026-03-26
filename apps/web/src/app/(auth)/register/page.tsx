@@ -134,7 +134,7 @@ export default function RegisterPage() {
               
               {/* Server Error */}
               {serverError && (
-                <Alert variant="destructive" className="mb-6 bg-red-500/10 border-red-500/50 text-red-400">
+                <Alert variant="error" className="mb-6 bg-red-500/10 border-red-500/50 text-red-400">
                   <AlertCircle className="h-4 w-4" />
                   <span className="ml-2">{serverError}</span>
                 </Alert>

@@ -100,9 +100,14 @@ export default function ParcelDetailClient() {
   }
 
   const mainImage = images[currentImageIndex];
-  const mainImageUrl = mainImage
-    ? resolveImageUrl(mainImage.watermarkedUrl || mainImage.originalUrl || mainImage.url || '')
-    : '/placeholder-parcel.jpg';
+  let mainImageUrl = '/placeholder-parcel.jpg';
+  if (mainImage) {
+    if (typeof mainImage === 'string') {
+      mainImageUrl = resolveImageUrl(mainImage);
+    } else if (typeof mainImage === 'object' && (mainImage.watermarkedUrl || mainImage.originalUrl || mainImage.url)) {
+      mainImageUrl = resolveImageUrl((mainImage as any).watermarkedUrl || (mainImage as any).originalUrl || (mainImage as any).url || '');
+    }
+  }
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -213,10 +218,12 @@ export default function ParcelDetailClient() {
                 <div className="p-4 bg-slate-50 border-t border-slate-200">
                   <div className="flex gap-2 overflow-x-auto pb-2">
                     {images.map((img, index) => {
-                      const thumbUrl = resolveImageUrl(img.thumbnailUrl || img.url || '');
+                      const thumbUrl = typeof img === 'string' 
+                        ? resolveImageUrl(img)
+                        : resolveImageUrl((img as any)?.thumbnailUrl || (img as any)?.url || '');
                       return (
                         <button
-                          key={img.id || index}
+                          key={index}
                           onClick={() => setCurrentImageIndex(index)}
                           className={`relative shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
                             index === currentImageIndex
