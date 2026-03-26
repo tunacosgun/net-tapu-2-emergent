@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { motion } from 'framer-motion';
 import { useLogin } from '@/providers/auth-provider';
 import { useAuthStore } from '@/stores/auth-store';
 import { loginSchema, type LoginFormData } from '@/lib/validators';
@@ -13,6 +14,7 @@ import { useRateLimit } from '@/hooks/use-rate-limit';
 import { Button, Alert, LoadingState } from '@/components/ui';
 import type { ApiError } from '@/types';
 import { AxiosError } from 'axios';
+import { Mail, Lock, ArrowRight, AlertCircle, CheckCircle2, Eye, EyeOff } from 'lucide-react';
 
 export default function LoginPage() {
   return (
@@ -35,6 +37,7 @@ function GoogleIcon() {
 
 function LoginContent() {
   const [serverError, setServerError] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
   const { cooldown, isLimited, checkRateLimit } = useRateLimit();
 
   const {
@@ -88,99 +91,251 @@ function LoginContent() {
   }
 
   return (
-    <div className="w-full">
-      {/* Header */}
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-green-50 mb-4">
-          <span className="text-2xl font-black text-green-600 tracking-tighter">NT</span>
-        </div>
-        <h1 className="text-2xl font-bold text-gray-900">Hesabınıza Giriş Yapın</h1>
-        <p className="mt-2 text-sm text-gray-500">
-          E-posta ve şifrenizle devam edin
-        </p>
-      </div>
-
-      {/* Google Login */}
-      <button
-        type="button"
-        onClick={handleGoogleLogin}
-        className="flex w-full items-center justify-center gap-3 rounded-xl border-2 border-gray-200 bg-white px-4 py-3.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm"
-      >
-        <GoogleIcon />
-        Google ile devam et
-      </button>
-
-      {/* Divider */}
-      <div className="relative my-6">
-        <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-gray-200" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase tracking-wider">
-          <span className="bg-white px-4 text-gray-400 font-medium">veya e-posta ile</span>
-        </div>
-      </div>
-
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-        {(serverError || oauthError) && (
-          <Alert>
-            {serverError ||
-              (oauthError === 'google_auth_failed'
-                ? 'Google ile giriş başarısız oldu. Lütfen tekrar deneyin.'
-                : 'Giriş başarısız.')}
-          </Alert>
-        )}
-
-        <FormField
-          label="E-posta"
-          type="email"
-          autoComplete="email"
-          placeholder="ornek@email.com"
-          error={errors.email?.message}
-          {...register('email')}
-        />
-
-        <FormField
-          label="Şifre"
-          type="password"
-          autoComplete="current-password"
-          placeholder="••••••••"
-          error={errors.password?.message}
-          {...register('password')}
-        />
-
-        <div className="flex items-center justify-between">
-          <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
-            <input type="checkbox" className="rounded border-gray-300 text-green-600 focus:ring-green-500" />
-            Beni hatırla
-          </label>
-          <Link
-            href="/forgot-password"
-            className="text-sm text-green-600 hover:text-green-700 font-semibold transition-colors"
+    <div className="min-h-screen flex">
+      
+      {/* Left Side - Branding */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-emerald-600 via-emerald-700 to-emerald-900 relative overflow-hidden">
+        {/* Pattern overlay */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-40" />
+        
+        <div className="relative z-10 flex flex-col justify-center px-16 text-white">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            Şifremi unuttum
-          </Link>
+            {/* Logo */}
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                <span className="text-2xl font-black">NT</span>
+              </div>
+              <div>
+                <h2 className="text-2xl font-heading font-bold">NetTapu</h2>
+                <p className="text-emerald-100 text-sm">Arsa & Açık Artırma</p>
+              </div>
+            </div>
+
+            <h1 className="text-4xl font-heading font-extrabold tracking-tight mb-4">
+              Türkiye'nin Güvenilir<br />Emlak Platformu
+            </h1>
+            <p className="text-xl text-emerald-100 mb-12 leading-relaxed">
+              Binlerce doğrulanmış arsa ilanı ve canlı açık artırma ile hayalinizdeki arsayı bulun.
+            </p>
+
+            {/* Features */}
+            <div className="space-y-4">
+              {[
+                'Güvenli ve şeffaf işlemler',
+                'Canlı açık artırma sistemi',
+                '7/24 müşteri desteği',
+              ].map((feature, i) => (
+                <motion.div
+                  key={feature}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
+                  className="flex items-center gap-3"
+                >
+                  <CheckCircle2 className="h-6 w-6 text-emerald-300" />
+                  <span className="text-emerald-50">{feature}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
+      </div>
 
-        <Button
-          type="submit"
-          disabled={isSubmitting || isLimited}
-          className="w-full !py-3.5 !rounded-xl !text-base !font-bold shadow-lg shadow-green-600/20 hover:shadow-green-600/30 transition-all duration-200"
+      {/* Right Side - Login Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-slate-50">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
+          className="w-full max-w-md"
         >
-          {isLimited
-            ? `${cooldown}s bekleyin`
-            : isSubmitting
-              ? 'Giriş yapılıyor...'
-              : 'Giriş Yap'}
-        </Button>
-      </form>
+          {/* Mobile Logo */}
+          <div className="lg:hidden text-center mb-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 mb-4 shadow-lg shadow-emerald-500/30">
+              <span className="text-2xl font-black text-white">NT</span>
+            </div>
+          </div>
 
-      {/* Footer */}
-      <p className="mt-8 text-center text-sm text-gray-500">
-        Hesabınız yok mu?{' '}
-        <Link href="/register" className="text-green-600 hover:text-green-700 font-bold transition-colors">
-          Üye Ol
-        </Link>
-      </p>
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-xl p-8">
+            {/* Header */}
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-heading font-extrabold text-slate-900 mb-2">
+                Hoş Geldiniz
+              </h1>
+              <p className="text-slate-600">
+                Hesabınıza giriş yaparak devam edin
+              </p>
+            </div>
+
+            {/* OAuth Error */}
+            {oauthError && (
+              <Alert variant="destructive" className="mb-6">
+                <AlertCircle className="h-4 w-4" />
+                <span className="ml-2">
+                  {oauthError === 'access_denied' ? 'Giriş iptal edildi.' : 'Sosyal giriş başarısız.'}
+                </span>
+              </Alert>
+            )}
+
+            {/* Server Error */}
+            {serverError && (
+              <Alert variant="destructive" className="mb-6">
+                <AlertCircle className="h-4 w-4" />
+                <span className="ml-2">{serverError}</span>
+              </Alert>
+            )}
+
+            {/* Rate Limit Warning */}
+            {isLimited && (
+              <Alert variant="warning" className="mb-6">
+                <AlertCircle className="h-4 w-4" />
+                <span className="ml-2">
+                  Çok fazla deneme yaptınız. {cooldown} saniye sonra tekrar deneyin.
+                </span>
+              </Alert>
+            )}
+
+            {/* Google Login Button */}
+            <button
+              type="button"
+              onClick={handleGoogleLogin}
+              className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white border-2 border-slate-200 rounded-xl text-slate-700 font-semibold hover:bg-slate-50 hover:border-slate-300 transition-all duration-200 shadow-sm mb-6"
+            >
+              <GoogleIcon />
+              Google ile Giriş Yap
+            </button>
+
+            {/* Divider */}
+            <div className="relative mb-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-slate-200" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-4 bg-white text-slate-500 font-medium">veya e-posta ile</span>
+              </div>
+            </div>
+
+            {/* Login Form */}
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+              {/* Email Field */}
+              <div>
+                <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-2">
+                  E-posta Adresi
+                </label>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+                  <input
+                    {...register('email')}
+                    type="email"
+                    id="email"
+                    placeholder="ornek@email.com"
+                    className={`w-full pl-12 pr-4 py-3 bg-slate-50 border rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all ${
+                      errors.email ? 'border-red-300 focus:ring-red-500' : 'border-slate-200'
+                    }`}
+                    disabled={isSubmitting}
+                  />
+                </div>
+                {errors.email && (
+                  <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+                    <AlertCircle className="h-4 w-4" />
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Password Field */}
+              <div>
+                <label htmlFor="password" className="block text-sm font-semibold text-slate-700 mb-2">
+                  Şifre
+                </label>
+                <div className="relative">
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+                  <input
+                    {...register('password')}
+                    type={showPassword ? 'text' : 'password'}
+                    id="password"
+                    placeholder="••••••••"
+                    className={`w-full pl-12 pr-12 py-3 bg-slate-50 border rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all ${
+                      errors.password ? 'border-red-300 focus:ring-red-500' : 'border-slate-200'
+                    }`}
+                    disabled={isSubmitting}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  >
+                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  </button>
+                </div>
+                {errors.password && (
+                  <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+                    <AlertCircle className="h-4 w-4" />
+                    {errors.password.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Forgot Password Link */}
+              <div className="text-right">
+                <Link
+                  href="/forgot-password"
+                  className="text-sm font-semibold text-emerald-600 hover:text-emerald-700 transition-colors"
+                >
+                  Şifremi Unuttum
+                </Link>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={isSubmitting || isLimited}
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white rounded-xl font-bold hover:from-emerald-700 hover:to-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/40 btn-shine"
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    Giriş Yapılıyor...
+                  </>
+                ) : (
+                  <>
+                    Giriş Yap
+                    <ArrowRight className="h-5 w-5" />
+                  </>
+                )}
+              </button>
+            </form>
+
+            {/* Register Link */}
+            <div className="mt-8 text-center">
+              <p className="text-slate-600">
+                Henüz hesabınız yok mu?{' '}
+                <Link
+                  href="/register"
+                  className="font-semibold text-emerald-600 hover:text-emerald-700 transition-colors"
+                >
+                  Ücretsiz Kayıt Olun
+                </Link>
+              </p>
+            </div>
+          </div>
+
+          {/* Footer Links */}
+          <div className="mt-6 text-center text-sm text-slate-500">
+            <Link href="/legal" className="hover:text-slate-700 transition-colors">
+              Gizlilik Politikası
+            </Link>
+            <span className="mx-2">•</span>
+            <Link href="/legal" className="hover:text-slate-700 transition-colors">
+              Kullanım Koşulları
+            </Link>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 }
